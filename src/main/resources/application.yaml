@@ -8,6 +8,17 @@ repositories:
         LIMIT :limit
       count-all: >
         SELECT count(*) from phone_numbers
+      count-by-phone-number: >
+        SELECT count(*) FROM phone_numbers
+        where phone_number = :phoneNumber
+      find-by-phone-number: >
+        SELECT phone_number FROM phone_numbers
+        where phone_number = :phoneNumber
+      activate-by-phone-number: >
+        UPDATE phone_numbers
+        SET is_active = true
+        WHERE phone_number = :phoneNumber
+        AND is_active = false
 
 pagination:
   page-size: 25

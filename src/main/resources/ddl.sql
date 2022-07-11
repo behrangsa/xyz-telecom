@@ -1,5 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 DROP TABLE IF EXISTS customer CASCADE;
 CREATE TABLE customer
 (
@@ -12,6 +10,9 @@ CREATE TABLE phone_numbers
 (
     id           UUID        NOT NULL PRIMARY KEY,
     customer_id  UUID        NOT NULL REFERENCES customer (id),
-    phone_number varchar(32) NOT NULL,
+    phone_number varchar(32) NOT NULL UNIQUE,
     is_active    BOOL        NOT NULL
 );;
+
+CREATE INDEX ON phone_numbers (customer_id);
+CREATE INDEX ON phone_numbers (phone_number, is_active);

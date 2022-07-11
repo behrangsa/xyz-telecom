@@ -18,6 +18,12 @@ public class PhoneNumberRepositoryProperties {
         private String findAllPhoneNumbers;
 
         private String countAll;
+
+        private String countByPhoneNumber;
+
+        private String findByPhoneNumber;
+
+        private String activateByPhoneNumber;
     }
 
 }
