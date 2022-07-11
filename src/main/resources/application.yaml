@@ -1,1 +1,8 @@
-
+repositories:
+  phone-numbers:
+    queries:
+      findAllPhoneNumbers: >
+        SELECT phone_number from phone_numbers
+        ORDER by phone_number ASC
+        OFFSET :offset
+        LIMIT :limit

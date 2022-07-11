@@ -6,6 +6,7 @@ import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -15,6 +16,7 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @Testcontainers
+@SqlConfig(separator = ";;")
 @ActiveProfiles("test")
 public abstract class AbstractIntegrationTest {
 

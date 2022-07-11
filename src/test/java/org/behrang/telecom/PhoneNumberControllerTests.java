@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -24,22 +26,32 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
+    @Sql("ddl.sql")
     void testGetAll_Empty() throws Exception {
         mockMvc.perform(get("/phone-numbers"))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$.content", hasSize(0)));
     }
 
     @Test
+    @Sql("ddl.sql")
+    @Sql("customers.sql")
+    @Sql("phone-numbers-8.sql")
     void testGetAll_LessThanOnePage() throws Exception {
         mockMvc.perform(get("/phone-numbers"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(8)));
+                .andExpect(jsonPath("$.content", hasSize(8)));
     }
 
     @Test
-    void testGetAll_MultiplePages() {
-        Assertions.fail("TODO");
+    @Sql("ddl.sql")
+    @Sql("customers.sql")
+    @Sql("phone-numbers.sql")
+    void testGetAll_MultiplePages() throws Exception {
+        mockMvc.perform(get("/phone-numbers"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", hasSize(25)));
     }
 
     @Test
