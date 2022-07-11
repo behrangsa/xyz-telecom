@@ -1,0 +1,53 @@
+= XYZ Telecom API
+:toc:
+
+A REST API in https://en.wikipedia.org/wiki/Richardson_Maturity_Model[Level 3]
+maturity level for a fictional Telecom company named `XYZ Telecom`.
+
+== Assumptions
+
+I have made some "`harmless`" assumptions in order to complete this exercise. For example,
+I have assumed that the primary key columns of resources have the `UUID` type.
+
+== Pagination
+
+All responses that contain a collection of items are paginated.
+
+== Resources
+
+Our REST API exposes 2 resources:
+
+* Customers
+* Phone Numbers
+
+All API end-points that return collections are paginated.
+
+=== Customers
+
+For the `Customer` resource, one nested end-point is exposed that returns
+a given customer's phone numbers:
+
+[source, text]
+----
+GET /customers/{customerId}/phone-numbers
+----
+
+NOTE: Some API designers prefer flat APIs. For example, we could have used
+this end-point instead: `GET /phone-numbers?customerId=\{customerId\}`. To some degree,
+this is a matter of style/preference. However, it is not without any side effects--for
+example, some ISPs/proxies may be configured not to cache requests that have query
+string parameters.
+
+=== Phone Numbers
+
+For the Phone Number resource, we have exposed two end-points:
+
+[source, text]
+----
+GET /phone-numbers
+
+POST /phone-numbers/{phoneNumber}/activate <1>
+----
+<1> Here, we have introduced a custom verb for the Phone Number resource: `activate`.
+
+For more information, please refer to the OpenAPI spec of our API.
