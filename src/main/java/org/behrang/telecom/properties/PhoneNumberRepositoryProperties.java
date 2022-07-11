@@ -16,6 +16,8 @@ public class PhoneNumberRepositoryProperties {
     @Data
     public static class Queries {
         private String findAllPhoneNumbers;
+
+        private String countAll;
     }
 
 }

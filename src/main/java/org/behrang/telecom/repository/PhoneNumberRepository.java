@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -29,5 +30,12 @@ public class PhoneNumberRepository {
             mapped.setPhoneNumber(rs.getString(1));
             return mapped;
         });
+    }
+
+    public long countAll() {
+        final var sql = properties.getQueries().getCountAll();
+
+        //noinspection ConstantConditions
+        return jdbcTemplate.queryForObject(sql, Collections.emptyMap(), Long.class);
     }
 }

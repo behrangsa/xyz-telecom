@@ -1,8 +1,13 @@
 repositories:
   phone-numbers:
     queries:
-      findAllPhoneNumbers: >
-        SELECT phone_number from phone_numbers
+      find-all-phone-numbers: >
+        SELECT phone_number FROM phone_numbers
         ORDER by phone_number ASC
         OFFSET :offset
         LIMIT :limit
+      count-all: >
+        SELECT count(*) from phone_numbers
+
+pagination:
+  page-size: 25
