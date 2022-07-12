@@ -45,7 +45,7 @@ public class PhoneNumberService {
         try {
             phoneNumberRepository.findByPhoneNumber(phoneNumber);
         } catch (final EmptyResultDataAccessException e) {
-            throw new PhoneNumberNotFoundException();
+            throw new PhoneNumberNotFoundException("Phone number not found");
         }
 
         final var rowsAffected = phoneNumberRepository.activateByPhoneNumber(phoneNumber);
