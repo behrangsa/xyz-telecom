@@ -2,7 +2,7 @@ repositories:
   customers:
     queries:
       find-by-id: >
-        SELECT id, name FROM customers
+        SELECT id, name FROM customer
         where id = :id
 
   phone-numbers:

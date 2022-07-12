@@ -24,7 +24,7 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     private static final String NON_EXISTENT_PHONE_NUMBER = "999999999";
 
     @Test
-    @Sql("ddl.sql")
+    @Sql("/ddl.sql")
     void testGetAll_Empty() throws Exception {
         mockMvc.perform(
                         get("/phone-numbers").contentType(MediaType.APPLICATION_JSON)
@@ -38,9 +38,9 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     }
 
     @Test
-    @Sql("ddl.sql")
-    @Sql("customers.sql")
-    @Sql("phone-numbers-8.sql")
+    @Sql("/ddl.sql")
+    @Sql("/customers.sql")
+    @Sql("/phone-numbers-8.sql")
     void testGetAll_LessThanOnePage() throws Exception {
         mockMvc.perform(
                         get("/phone-numbers").contentType(MediaType.APPLICATION_JSON)
@@ -54,9 +54,9 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     }
 
     @Test
-    @Sql("ddl.sql")
-    @Sql("customers.sql")
-    @Sql("phone-numbers.sql")
+    @Sql("/ddl.sql")
+    @Sql("/customers.sql")
+    @Sql("/phone-numbers.sql")
     void testGetAll_MultiplePages() throws Exception {
         mockMvc.perform(
                         get("/phone-numbers?pageNumber=2").contentType(MediaType.APPLICATION_JSON)
@@ -70,9 +70,9 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     }
 
     @Test
-    @Sql("ddl.sql")
-    @Sql("customers.sql")
-    @Sql("phone-numbers.sql")
+    @Sql("/ddl.sql")
+    @Sql("/customers.sql")
+    @Sql("/phone-numbers.sql")
     void testActivate_Successful() throws Exception {
         mockMvc.perform(
                         post(String.format("/phone-numbers/%s?action=activate", INACTIVE_PHONE_NUMBER)).contentType(MediaType.APPLICATION_JSON)
@@ -84,7 +84,7 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     }
 
     @Test
-    @Sql("ddl.sql")
+    @Sql("/ddl.sql")
     void testActivate_NotFound() throws Exception {
         mockMvc.perform(
                         post(String.format("/phone-numbers/%s?action=activate", NON_EXISTENT_PHONE_NUMBER)).contentType(MediaType.APPLICATION_JSON)
@@ -95,9 +95,9 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     }
 
     @Test
-    @Sql("ddl.sql")
-    @Sql("customers.sql")
-    @Sql("phone-numbers.sql")
+    @Sql("/ddl.sql")
+    @Sql("/customers.sql")
+    @Sql("/phone-numbers.sql")
     void testActivate_AlreadyActivated() throws Exception {
         mockMvc.perform(
                         post(String.format("/phone-numbers/%s?action=activate", ACTIVE_PHONE_NUMBER)).contentType(MediaType.APPLICATION_JSON)

@@ -41,7 +41,8 @@ public class CustomerController {
     }
 
     @GetMapping(
-            path = "/{customerId}/phone-numbers"
+            path = "/{customerId}/phone-numbers",
+            params = "pageNumber"
     )
     public HttpEntity<PhoneNumbersResponse> listPhoneNumbers(@PathVariable("customerId") UUID customerId, @RequestParam("pageNumber") final int pageNumber) {
         final var responsePayload = phoneNumberService.findAllByCustomerId(customerId, pageNumber);
