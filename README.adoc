@@ -46,8 +46,10 @@ For the Phone Number resource, we have exposed two end-points:
 ----
 GET /phone-numbers
 
-POST /phone-numbers/{phoneNumber}/activate <1>
+POST /phone-numbers/{phoneNumber}?action=activate <1>
 ----
 <1> Here, we have introduced a custom verb for the Phone Number resource: `activate`.
+Some frameworks such as Ruby on Rails allow defining and passing custom verbs using a
+"`standardized`" `_method` query string parameter.
 
 For more information, please refer to the OpenAPI spec of our API.
