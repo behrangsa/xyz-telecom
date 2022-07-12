@@ -3,6 +3,8 @@ package org.behrang.telecom.repository;
 import lombok.RequiredArgsConstructor;
 import org.behrang.telecom.entity.PhoneNumber;
 import org.behrang.telecom.properties.PhoneNumberRepositoryProperties;
+import org.behrang.telecom.repository.PhoneNumberConstants.ColumnNames;
+import org.behrang.telecom.repository.PhoneNumberConstants.ParameterNames;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -14,12 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import static org.behrang.telecom.repository.CommonParameterNames.LIMIT;
-import static org.behrang.telecom.repository.CommonParameterNames.OFFSET;
-import static org.behrang.telecom.repository.PhoneNumberColumns.CUSTOMER_ID;
-import static org.behrang.telecom.repository.PhoneNumberColumns.ID;
-import static org.behrang.telecom.repository.PhoneNumberColumns.IS_ACTIVE;
-import static org.behrang.telecom.repository.PhoneNumberColumns.PHONE_NUMBER;
 
 
 @Repository
@@ -34,8 +30,8 @@ public class PhoneNumberRepository {
         final var sql = properties.getQueries().getFindAllPhoneNumbers();
 
         final var params = new MapSqlParameterSource()
-                .addValue(LIMIT, limit)
-                .addValue(OFFSET, offset);
+                .addValue(CommonConstants.SQL_LIMIT, limit)
+                .addValue(CommonConstants.SQL_OFFSET, offset);
 
         return jdbcTemplate.query(sql, params, new PhoneNumberMapper());
     }
@@ -51,7 +47,7 @@ public class PhoneNumberRepository {
         final var sql = properties.getQueries().getCountByPhoneNumber();
 
         final var params = new MapSqlParameterSource()
-                .addValue(PHONE_NUMBER, phoneNumber);
+                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);
 
         final var count = jdbcTemplate.queryForObject(sql, params, Integer.class);
 
@@ -63,7 +59,7 @@ public class PhoneNumberRepository {
         final var sql = properties.getQueries().getFindByPhoneNumber();
 
         final var params =
-                new MapSqlParameterSource().addValue(PHONE_NUMBER, phoneNumber);
+                new MapSqlParameterSource().addValue(ParameterNames.PHONE_NUMBER, phoneNumber);
 
         return jdbcTemplate.queryForObject(sql, params, new PhoneNumberMapper());
     }
@@ -72,7 +68,7 @@ public class PhoneNumberRepository {
         final var sql = properties.getQueries().getActivateByPhoneNumber();
 
         final var params = new MapSqlParameterSource()
-                .addValue(PHONE_NUMBER, phoneNumber);
+                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);
 
         return jdbcTemplate.update(sql, params);
     }
@@ -83,10 +79,10 @@ public class PhoneNumberRepository {
         public PhoneNumber mapRow(ResultSet rs, int rowNum) throws SQLException {
             final var model = new PhoneNumber();
 
-            model.setId(UUID.fromString(rs.getString(ID)));
-            model.setCustomerId(UUID.fromString(rs.getString(CUSTOMER_ID)));
-            model.setPhoneNumber(rs.getString(PHONE_NUMBER));
-            model.setActive(rs.getBoolean(IS_ACTIVE));
+            model.setId(UUID.fromString(rs.getString(ColumnNames.ID)));
+            model.setCustomerId(UUID.fromString(rs.getString(ColumnNames.CUSTOMER_ID)));
+            model.setPhoneNumber(rs.getString(ColumnNames.PHONE_NUMBER));
+            model.setActive(rs.getBoolean(ColumnNames.IS_ACTIVE));
 
             return model;
         }

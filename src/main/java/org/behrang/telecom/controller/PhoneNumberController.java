@@ -18,7 +18,7 @@ public class PhoneNumberController {
 
     private final PhoneNumberService phoneNumberService;
 
-    @GetMapping(path = {"", "/"})
+    @GetMapping
     public HttpEntity<PhoneNumbersResponse> list() {
         return list(0);
     }
@@ -44,7 +44,15 @@ public class PhoneNumberController {
 
     @PostMapping(path = "/{phoneNumber}", params = {"action=activate"})
     public HttpEntity<PhoneActivationResponse> activate(@PathVariable("phoneNumber") final String phoneNumber) {
-        return null;
+        phoneNumberService.activate(phoneNumber);
+
+        final var response = new PhoneActivationResponse(PhoneActivationResponse.STATUS_ACTIVATED);
+        response.add(
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).activate(phoneNumber))
+                        .withSelfRel()
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     private void addSelfLink(final PhoneNumbersResponse response, final int currentPage) {

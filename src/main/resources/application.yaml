@@ -2,7 +2,7 @@ repositories:
   phone-numbers:
     queries:
       find-all-phone-numbers: >
-        SELECT phone_number FROM phone_numbers
+        SELECT id, customer_id, phone_number, is_active FROM phone_numbers
         ORDER by phone_number ASC
         OFFSET :offset
         LIMIT :limit
@@ -12,7 +12,7 @@ repositories:
         SELECT count(*) FROM phone_numbers
         where phone_number = :phoneNumber
       find-by-phone-number: >
-        SELECT phone_number FROM phone_numbers
+        SELECT id, customer_id, phone_number, is_active FROM phone_numbers
         where phone_number = :phoneNumber
       activate-by-phone-number: >
         UPDATE phone_numbers
