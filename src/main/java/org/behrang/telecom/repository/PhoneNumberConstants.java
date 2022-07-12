@@ -17,5 +17,7 @@ public interface PhoneNumberConstants {
 
         String PHONE_NUMBER = "phoneNumber";
 
+        String CUSTOMER_ID = "customer_id";
+
     }
 }

@@ -6,6 +6,7 @@ import org.behrang.telecom.exception.PhoneNumberAlreadyActivatedException;
 import org.behrang.telecom.exception.PhoneNumberNotFoundException;
 import org.behrang.telecom.model.CollectionPayload;
 import org.behrang.telecom.properties.PaginationProperties;
+import org.behrang.telecom.repository.CustomerRepository;
 import org.behrang.telecom.repository.PhoneNumberRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional(isolation = Isolation.READ_COMMITTED)
@@ -23,6 +25,8 @@ public class PhoneNumberService {
 
     private final PhoneNumberRepository phoneNumberRepository;
 
+    private final CustomerRepository customerRepository;
+
     public CollectionPayload<List<PhoneNumber>> findAll(final int page) {
         final int pageSize = paginationProperties.getPageSize();
         final var totalCount = phoneNumberRepository.countAll();
@@ -30,8 +34,25 @@ public class PhoneNumberService {
         final var hasNext = totalCount > offset + pageSize;
         final var hasPrev = page > 0;
 
-
         final var phoneNumbers = phoneNumberRepository.findAll(
+                offset,
+                pageSize
+        );
+
+        return new CollectionPayload<>(phoneNumbers, hasNext, hasPrev);
+    }
+
+    public CollectionPayload<List<PhoneNumber>> findAllByCustomerId(final UUID customerId, final int page) {
+        final var customer = customerRepository.findById(customerId);
+
+        final int pageSize = paginationProperties.getPageSize();
+        final var totalCount = phoneNumberRepository.countAll();
+        final var offset = page * pageSize;
+        final var hasNext = totalCount > offset + pageSize;
+        final var hasPrev = page > 0;
+
+        final var phoneNumbers = phoneNumberRepository.findAllByCustomerId(
+                customer.getId(),
                 offset,
                 pageSize
         );

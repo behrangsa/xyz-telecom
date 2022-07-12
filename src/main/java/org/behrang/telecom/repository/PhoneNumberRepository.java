@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-
 @Repository
 @RequiredArgsConstructor
 public class PhoneNumberRepository {
@@ -36,11 +35,32 @@ public class PhoneNumberRepository {
         return jdbcTemplate.query(sql, params, new PhoneNumberMapper());
     }
 
+    public List<PhoneNumber> findAllByCustomerId(final UUID customerId, final int offset, final int limit) {
+        final var sql = properties.getQueries().getFindAllPhoneNumbersByCustomerId();
+
+        final var params = new MapSqlParameterSource()
+                .addValue(ParameterNames.CUSTOMER_ID, customerId)
+                .addValue(CommonConstants.SQL_LIMIT, limit)
+                .addValue(CommonConstants.SQL_OFFSET, offset);
+
+        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());
+    }
+
     public long countAll() {
         final var sql = properties.getQueries().getCountAll();
 
         //noinspection ConstantConditions
         return jdbcTemplate.queryForObject(sql, Collections.emptyMap(), Long.class);
+    }
+
+    public long countAllByCustomerId(final UUID customerId) {
+        final var sql = properties.getQueries().getCountAllByCustomerId();
+
+        final var params =
+                new MapSqlParameterSource().addValue(ParameterNames.CUSTOMER_ID, customerId);
+
+        //noinspection ConstantConditions
+        return jdbcTemplate.queryForObject(sql, params, Long.class);
     }
 
     public boolean existsByPhoneNumber(final String phoneNumber) {

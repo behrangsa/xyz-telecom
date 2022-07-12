@@ -1,4 +1,10 @@
 repositories:
+  customers:
+    queries:
+      find-by-id: >
+        SELECT id, name FROM customers
+        where id = :id
+
   phone-numbers:
     queries:
       find-all-phone-numbers: >
@@ -6,14 +12,23 @@ repositories:
         ORDER by phone_number ASC
         OFFSET :offset
         LIMIT :limit
+      find-all-phone-numbers-by-customer-id: >
+        SELECT id, customer_id, phone_number, is_active FROM phone_numbers
+        ORDER by phone_number ASC
+        WHERE customer_id = :customerId
+        OFFSET :offset
+        LIMIT :limit
       count-all: >
         SELECT count(*) from phone_numbers
+      count-all-by-customer-id: >
+        SELECT count(*) from phone_numbers
+        WHERE customer_id = :customerId
       count-by-phone-number: >
         SELECT count(*) FROM phone_numbers
-        where phone_number = :phoneNumber
+        WHERE phone_number = :phoneNumber
       find-by-phone-number: >
         SELECT id, customer_id, phone_number, is_active FROM phone_numbers
-        where phone_number = :phoneNumber
+        WHERE phone_number = :phoneNumber
       activate-by-phone-number: >
         UPDATE phone_numbers
         SET is_active = true

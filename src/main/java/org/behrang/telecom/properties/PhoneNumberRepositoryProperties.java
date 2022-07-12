@@ -19,11 +19,15 @@ public class PhoneNumberRepositoryProperties {
 
         private String countAll;
 
+        private String countAllByCustomerId;
+
         private String countByPhoneNumber;
 
         private String findByPhoneNumber;
 
         private String activateByPhoneNumber;
+
+        private String findAllPhoneNumbersByCustomerId;
     }
 
 }
