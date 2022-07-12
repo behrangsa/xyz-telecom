@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Order(TestOrder.REPOSITORY)
+
 @Sql("/ddl.sql")
 @Sql("/customers.sql")
 @Sql("/phone-numbers.sql")

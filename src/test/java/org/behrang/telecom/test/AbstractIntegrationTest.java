@@ -1,10 +1,12 @@
 package org.behrang.telecom.test;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -28,6 +30,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 @Testcontainers
 @SqlConfig(separator = ";;")
 @ActiveProfiles("test")
+@DirtiesContext
 public abstract class AbstractIntegrationTest {
 
     protected MockMvc mockMvc;
@@ -41,6 +44,7 @@ public abstract class AbstractIntegrationTest {
             .withPassword("password")
             .withExposedPorts(5432)
             .withDatabaseName("xyz");
+
 
     @DynamicPropertySource
     public static void registerPgProperties(DynamicPropertyRegistry registry) {
@@ -60,6 +64,11 @@ public abstract class AbstractIntegrationTest {
                         )
                 )
                 .build();
+    }
+
+    @AfterAll
+    public static void cleanup() {
+        POSTGRES_CONTAINER.stop();
     }
 
 }

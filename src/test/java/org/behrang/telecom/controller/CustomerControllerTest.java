@@ -14,7 +14,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Order(TestOrder.CONTROLLER)
+
 class CustomerControllerTest extends AbstractIntegrationTest {
 
     @Test

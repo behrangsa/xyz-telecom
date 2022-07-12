@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
  * The first SpringBootTest to run, to ensure the plumbing is okay, before
  * running other SpringBootTest tests.
  */
-@Order(TestOrder.CONTEXT)
+
 class ApplicationTests extends AbstractIntegrationTest {
 
     @Test

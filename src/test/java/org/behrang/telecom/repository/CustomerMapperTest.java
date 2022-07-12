@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Order(TestOrder.UNIT)
+
 class CustomerMapperTest {
 
     private CustomerRepository.CustomerMapper mapper;
