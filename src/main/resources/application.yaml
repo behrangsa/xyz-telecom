@@ -13,9 +13,9 @@ repositories:
         OFFSET :offset
         LIMIT :limit
       find-all-phone-numbers-by-customer-id: >
-        SELECT id, customer_id, phone_number, is_active FROM phone_numbers
-        ORDER by phone_number ASC
+        SELECT id, customer_id, phone_number, is_active FROM phone_numbers        
         WHERE customer_id = :customerId
+        ORDER by phone_number ASC
         OFFSET :offset
         LIMIT :limit
       count-all: >

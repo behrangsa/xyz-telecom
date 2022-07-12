@@ -1,9 +1,10 @@
 package org.behrang.telecom.service;
 
 import lombok.RequiredArgsConstructor;
+import org.behrang.telecom.entity.Customer;
 import org.behrang.telecom.entity.PhoneNumber;
 import org.behrang.telecom.exception.PhoneNumberAlreadyActivatedException;
-import org.behrang.telecom.exception.PhoneNumberNotFoundException;
+import org.behrang.telecom.exception.EntityNotFoundException;
 import org.behrang.telecom.model.CollectionPayload;
 import org.behrang.telecom.properties.PaginationProperties;
 import org.behrang.telecom.repository.CustomerRepository;
@@ -43,7 +44,12 @@ public class PhoneNumberService {
     }
 
     public CollectionPayload<List<PhoneNumber>> findAllByCustomerId(final UUID customerId, final int page) {
-        final var customer = customerRepository.findById(customerId);
+        final Customer customer;
+        try {
+            customer = customerRepository.findById(customerId);
+        } catch (final EmptyResultDataAccessException e) {
+            throw new EntityNotFoundException("Customer not found");
+        }
 
         final int pageSize = paginationProperties.getPageSize();
         final var totalCount = phoneNumberRepository.countAll();
@@ -61,12 +67,10 @@ public class PhoneNumberService {
     }
 
     public void activate(final String phoneNumber) {
-        final PhoneNumber entity;
-
         try {
             phoneNumberRepository.findByPhoneNumber(phoneNumber);
         } catch (final EmptyResultDataAccessException e) {
-            throw new PhoneNumberNotFoundException("Phone number not found");
+            throw new EntityNotFoundException("Phone number not found");
         }
 
         final var rowsAffected = phoneNumberRepository.activateByPhoneNumber(phoneNumber);

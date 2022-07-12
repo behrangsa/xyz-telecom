@@ -1,4 +1,4 @@
-package org.behrang.telecom;
+package org.behrang.telecom.test;
 
 public interface TestOrder {
     int UNIT = 1;

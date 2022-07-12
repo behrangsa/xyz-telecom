@@ -1,8 +1,8 @@
 package org.behrang.telecom.repository;
 
 
-import org.behrang.telecom.AbstractIntegrationTest;
-import org.behrang.telecom.TestOrder;
+import org.behrang.telecom.test.AbstractIntegrationTest;
+import org.behrang.telecom.test.TestOrder;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

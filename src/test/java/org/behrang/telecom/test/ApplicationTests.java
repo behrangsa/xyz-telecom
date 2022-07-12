@@ -1,4 +1,4 @@
-package org.behrang.telecom;
+package org.behrang.telecom.test;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

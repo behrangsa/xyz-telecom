@@ -1,7 +1,7 @@
 package org.behrang.telecom.repository;
 
 
-import org.behrang.telecom.TestOrder;
+import org.behrang.telecom.test.TestOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

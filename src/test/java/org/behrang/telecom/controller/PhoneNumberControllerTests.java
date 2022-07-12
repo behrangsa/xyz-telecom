@@ -1,5 +1,7 @@
-package org.behrang.telecom;
+package org.behrang.telecom.controller;
 
+import org.behrang.telecom.test.AbstractIntegrationTest;
+import org.behrang.telecom.test.TestOrder;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
