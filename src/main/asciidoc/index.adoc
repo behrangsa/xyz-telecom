@@ -1,5 +1,15 @@
-= XYZ Telecom - Live Documentation
+= XYZ Telecom REST API: Live Documentation
 :toc:
+:toclevels: 4
+
+XYZ Telecom REST API exposes resources that allow clients query for phone
+numbers, activate phone numbers, and query for phone numbers of a given
+customer.
+
+This documentation is mostly generated automatically when integration tests
+are executed, thanks to the features provided by the
+https://spring.io/projects/spring-restdocs[Spring REST Docs]
+library.
 
 == Resources
 
@@ -8,14 +18,17 @@ The XYZ Telecom REST API exposes the following resources:
 * <<customers>>
 * <<phoneNumbers>>
 
+All responses containing collections of resources are paginated.
+
 [#customers]
 == Customers
 
-// suppress inspection "GrazieInspection"
-A single nested-resource end-point is exposed for the Customers resource that returns the phone numbers
-that belong to that given customer (paginated).
+=== `GET /customers/\{customerId}/phone-numbers`
 
-=== `/customers/\{customerId}/phone-numbers`
+This end-point returns all phone numbers for a given customer. Sample requests using
+the HTTP syntax, HTTPie, and curl commands are included for your reference:
+
+==== Happy path
 
 .HTTP request
 include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-request.adoc[]
@@ -32,10 +45,12 @@ include::{snippets}/customer_controller_tests/test_get_all__existing_customer_wi
 [#phoneNumbers]
 == Phone Numbers
 
-Two end-points are exposed for the Phone Numbers resource: the first one returns all the phone numbers (paginated),
-and the second one activates a phone number.
+=== `GET /phone-numbers`
 
-=== `/phone-numbers`
+This end-point returns a paginated list of all phone numbers. Sample requests using
+the HTTP syntax, HTTPie, and curl commands are included for your reference:
+
+==== Happy path
 
 .HTTP request
 include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-request.adoc[]
@@ -49,7 +64,12 @@ include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/c
 .HTTP response
 include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-response.adoc[]
 
-=== `/phone-numbers/\{phoneNumber}?action=activate`
+=== `POST /phone-numbers/\{phoneNumber}?action=activate`
+
+This end-point permits activating a phone number. Sample requests using
+the HTTP syntax, HTTPie, and curl commands for n scenarios are given for your reference:
+
+==== Happy path
 
 .HTTP request
 include::{snippets}/phone_number_controller_tests/test_activate__successful/http-request.adoc[]
@@ -62,6 +82,34 @@ include::{snippets}/phone_number_controller_tests/test_activate__successful/curl
 
 .HTTP response
 include::{snippets}/phone_number_controller_tests/test_activate__successful/http-response.adoc[]
+
+==== Phone number not found
+
+.HTTP request
+include::{snippets}/phone_number_controller_tests/test_activate__not_found/http-request.adoc[]
+
+.HTTPie request
+include::{snippets}/phone_number_controller_tests/test_activate__not_found/httpie-request.adoc[]
+
+.curl request
+include::{snippets}/phone_number_controller_tests/test_activate__not_found/curl-request.adoc[]
+
+.HTTP response
+include::{snippets}/phone_number_controller_tests/test_activate__not_found/http-response.adoc[]
+
+==== Phone number already activated
+
+.HTTP request
+include::{snippets}/phone_number_controller_tests/test_activate__already_activated/http-request.adoc[]
+
+.HTTPie request
+include::{snippets}/phone_number_controller_tests/test_activate__already_activated/httpie-request.adoc[]
+
+.curl request
+include::{snippets}/phone_number_controller_tests/test_activate__already_activated/curl-request.adoc[]
+
+.HTTP response
+include::{snippets}/phone_number_controller_tests/test_activate__already_activated/http-response.adoc[]
 
 '''
 
