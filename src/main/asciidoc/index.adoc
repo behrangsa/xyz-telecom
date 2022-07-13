@@ -1,0 +1,50 @@
+= Live Documentation
+:toc:
+
+The snippets here are automatically generated when tests are run.
+
+== Customers
+
+=== Get All Phone Numbers by Customer ID
+
+.HTTP request
+include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-request.adoc[]
+
+.HTTPie request
+include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/httpie-request.adoc[]
+
+.curl request
+include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/curl-request.adoc[]
+
+.HTTP response
+include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-response.adoc[]
+
+== Phone Numbers
+
+=== Get All Phone Numbers
+
+.HTTP request
+include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-request.adoc[]
+
+.HTTPie request
+include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/httpie-request.adoc[]
+
+.curl request
+include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/curl-request.adoc[]
+
+.HTTP response
+include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-response.adoc[]
+
+=== Activate Phone Number
+
+.HTTP request
+include::{snippets}/phone_number_controller_tests/test_activate__successful/http-request.adoc[]
+
+.HTTPie request
+include::{snippets}/phone_number_controller_tests/test_activate__successful/httpie-request.adoc[]
+
+.curl request
+include::{snippets}/phone_number_controller_tests/test_activate__successful/curl-request.adoc[]
+
+.HTTP response
+include::{snippets}/phone_number_controller_tests/test_activate__successful/http-response.adoc[]

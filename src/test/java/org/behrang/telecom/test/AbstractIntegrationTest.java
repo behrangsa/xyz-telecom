@@ -3,6 +3,7 @@ package org.behrang.telecom.test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -32,6 +33,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 @SqlConfig(separator = ";;")
 @ActiveProfiles("test")
 @DirtiesContext
+@AutoConfigureRestDocs(outputDir = "target/snippets")
 public abstract class AbstractIntegrationTest {
 
     protected MockMvc mockMvc;
@@ -59,7 +61,7 @@ public abstract class AbstractIntegrationTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
                 .apply(documentationConfiguration(restDocumentation))
                 .alwaysDo(
-                        document("{method-name}",
+                        document("{class_name}/{method_name}",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint())
                         )
