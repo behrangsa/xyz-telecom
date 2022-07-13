@@ -47,10 +47,12 @@ jobs:
       - name: Prepare website
         run: |
           mkdir -p docs/spec &&
+          mkdir -p docs/open-api &&
           cp -vr target/site/jacoco docs &&
-          cp -vr target/generated-docs/index.html docs/spec
+          cp -vr target/generated-docs/index.html docs/spec &&
+          cp -v  target/openapi.json docs/open-api
 
-      - name: Updated the project website
+      - name: Update the project website
         run: |
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'GitHub Actions'
