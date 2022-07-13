@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: 'postgres:14'
+    networks:
+      - xyz-net
+    ports:
+      - "15432:5432"
+    environment:
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=xyz-api'
+
+
+networks:
+  xyz-net:

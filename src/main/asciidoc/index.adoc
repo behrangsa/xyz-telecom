@@ -1,11 +1,21 @@
-= Live Documentation
+= XYZ Telecom - Live Documentation
 :toc:
 
-The snippets here are automatically generated when tests are run.
+== Resources
 
+The XYZ Telecom REST API exposes the following resources:
+
+* <<customers>>
+* <<phoneNumbers>>
+
+[#customers]
 == Customers
 
-=== Get All Phone Numbers by Customer ID
+// suppress inspection "GrazieInspection"
+A single nested-resource end-point is exposed for the Customers resource that returns the phone numbers
+that belong to that given customer (paginated).
+
+=== `/customers/\{customerId}/phone-numbers`
 
 .HTTP request
 include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-request.adoc[]
@@ -19,9 +29,13 @@ include::{snippets}/customer_controller_tests/test_get_all__existing_customer_wi
 .HTTP response
 include::{snippets}/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-response.adoc[]
 
+[#phoneNumbers]
 == Phone Numbers
 
-=== Get All Phone Numbers
+Two end-points are exposed for the Phone Numbers resource: the first one returns all the phone numbers (paginated),
+and the second one activates a phone number.
+
+=== `/phone-numbers`
 
 .HTTP request
 include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-request.adoc[]
@@ -35,7 +49,7 @@ include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/c
 .HTTP response
 include::{snippets}/phone_number_controller_tests/test_get_all__multiple_pages/http-response.adoc[]
 
-=== Activate Phone Number
+=== `/phone-numbers/\{phoneNumber}?action=activate`
 
 .HTTP request
 include::{snippets}/phone_number_controller_tests/test_activate__successful/http-request.adoc[]
@@ -48,3 +62,7 @@ include::{snippets}/phone_number_controller_tests/test_activate__successful/curl
 
 .HTTP response
 include::{snippets}/phone_number_controller_tests/test_activate__successful/http-response.adoc[]
+
+'''
+
+Generated at {docdatetime}.

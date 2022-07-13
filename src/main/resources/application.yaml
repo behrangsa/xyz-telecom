@@ -34,3 +34,10 @@ repositories:
 
 pagination:
   page-size: 25
+
+spring:
+  datasource:
+    username: xyz-api
+    password: password
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:15432/postgres
