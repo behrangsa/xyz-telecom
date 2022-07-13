@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PhoneNumberRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">xyz-telecom-api</a> &gt; <a href="index.source.html" class="el_package">org.behrang.telecom.repository</a> &gt; <span class="el_source">PhoneNumberRepository.java</span></div><h1>PhoneNumberRepository.java</h1><pre class="source lang-java linenums">package org.behrang.telecom.repository;
+
+import lombok.RequiredArgsConstructor;
+import org.behrang.telecom.entity.PhoneNumber;
+import org.behrang.telecom.properties.PhoneNumberRepositoryProperties;
+import org.behrang.telecom.repository.PhoneNumberConstants.ColumnNames;
+import org.behrang.telecom.repository.PhoneNumberConstants.ParameterNames;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+
+@Repository
+<span class="fc" id="L21">@RequiredArgsConstructor</span>
+public class PhoneNumberRepository {
+
+    private final PhoneNumberRepositoryProperties properties;
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public List&lt;PhoneNumber&gt; findAll(final int offset, final int limit) {
+<span class="fc" id="L29">        final var sql = properties.getQueries().getFindAllPhoneNumbers();</span>
+
+<span class="fc" id="L31">        final var params = new MapSqlParameterSource()</span>
+<span class="fc" id="L32">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
+<span class="fc" id="L33">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
+
+<span class="fc" id="L35">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
+    }
+
+    public List&lt;PhoneNumber&gt; findAllByCustomerId(final UUID customerId, final int offset, final int limit) {
+<span class="fc" id="L39">        final var sql = properties.getQueries().getFindAllPhoneNumbersByCustomerId();</span>
+
+<span class="fc" id="L41">        final var params = new MapSqlParameterSource()</span>
+<span class="fc" id="L42">                .addValue(ParameterNames.CUSTOMER_ID, customerId)</span>
+<span class="fc" id="L43">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
+<span class="fc" id="L44">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
+
+<span class="fc" id="L46">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
+    }
+
+    public long countAll() {
+<span class="fc" id="L50">        final var sql = properties.getQueries().getCountAll();</span>
+
+        //noinspection ConstantConditions
+<span class="fc" id="L53">        return jdbcTemplate.queryForObject(sql, Collections.emptyMap(), Long.class);</span>
+    }
+
+    public long countAllByCustomerId(final UUID customerId) {
+<span class="fc" id="L57">        final var sql = properties.getQueries().getCountAllByCustomerId();</span>
+
+<span class="fc" id="L59">        final var params =</span>
+<span class="fc" id="L60">                new MapSqlParameterSource().addValue(ParameterNames.CUSTOMER_ID, customerId);</span>
+
+        //noinspection ConstantConditions
+<span class="fc" id="L63">        return jdbcTemplate.queryForObject(sql, params, Long.class);</span>
+    }
+
+    public PhoneNumber findByPhoneNumber(final String phoneNumber) {
+<span class="fc" id="L67">        final var sql = properties.getQueries().getFindByPhoneNumber();</span>
+
+<span class="fc" id="L69">        final var params =</span>
+<span class="fc" id="L70">                new MapSqlParameterSource().addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
+
+<span class="fc" id="L72">        return jdbcTemplate.queryForObject(sql, params, new PhoneNumberMapper());</span>
+    }
+
+    public int activateByPhoneNumber(final String phoneNumber) {
+<span class="fc" id="L76">        final var sql = properties.getQueries().getActivateByPhoneNumber();</span>
+
+<span class="fc" id="L78">        final var params = new MapSqlParameterSource()</span>
+<span class="fc" id="L79">                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
+
+<span class="fc" id="L81">        return jdbcTemplate.update(sql, params);</span>
+    }
+
+<span class="fc" id="L84">    public static class PhoneNumberMapper implements RowMapper&lt;PhoneNumber&gt; {</span>
+
+        @Override
+        public PhoneNumber mapRow(ResultSet rs, int rowNum) throws SQLException {
+<span class="fc" id="L88">            final var model = new PhoneNumber();</span>
+
+<span class="fc" id="L90">            model.setId(UUID.fromString(rs.getString(ColumnNames.ID)));</span>
+<span class="fc" id="L91">            model.setCustomerId(UUID.fromString(rs.getString(ColumnNames.CUSTOMER_ID)));</span>
+<span class="fc" id="L92">            model.setPhoneNumber(rs.getString(ColumnNames.PHONE_NUMBER));</span>
+<span class="fc" id="L93">            model.setActive(rs.getBoolean(ColumnNames.IS_ACTIVE));</span>
+
+<span class="fc" id="L95">            return model;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

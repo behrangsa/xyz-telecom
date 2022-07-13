@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PhoneNumberController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">xyz-telecom-api</a> &gt; <a href="index.source.html" class="el_package">org.behrang.telecom.controller</a> &gt; <span class="el_source">PhoneNumberController.java</span></div><h1>PhoneNumberController.java</h1><pre class="source lang-java linenums">package org.behrang.telecom.controller;
+
+import lombok.RequiredArgsConstructor;
+import org.behrang.telecom.response.PhoneActivationResponse;
+import org.behrang.telecom.response.PhoneNumberResponse;
+import org.behrang.telecom.response.PhoneNumbersResponse;
+import org.behrang.telecom.service.PhoneNumberService;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(
+        path = &quot;/phone-numbers&quot;,
+        consumes = {
+                MediaType.APPLICATION_JSON_VALUE,
+                HalMediaType.APPLICATION_HAL_JSON_VALUE,
+        },
+        produces = {
+                MediaType.APPLICATION_JSON_VALUE,
+                HalMediaType.APPLICATION_HAL_JSON_VALUE
+        }
+)
+<span class="fc" id="L34">@RequiredArgsConstructor</span>
+public class PhoneNumberController {
+
+    private final PhoneNumberService phoneNumberService;
+
+    @GetMapping(path = &quot;/{phoneNumber}&quot;)
+    public HttpEntity&lt;PhoneNumberResponse&gt; getOne(@PathVariable(&quot;phoneNumber&quot;) final String phoneNumber) {
+<span class="fc" id="L41">        final var responsePayload = phoneNumberService.findByPhoneNumber(phoneNumber);</span>
+
+<span class="fc" id="L43">        final var response = new PhoneNumberResponse(responsePayload.content());</span>
+
+<span class="fc" id="L45">        addSelfLink(response, phoneNumber);</span>
+
+<span class="fc" id="L47">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+    @GetMapping
+    public HttpEntity&lt;PhoneNumbersResponse&gt; getAll() {
+<span class="fc" id="L52">        return getAll(0);</span>
+    }
+
+    @GetMapping(params = {&quot;pageNumber&quot;})
+    public HttpEntity&lt;PhoneNumbersResponse&gt; getAll(@RequestParam(&quot;pageNumber&quot;) final int pageNumber) {
+<span class="fc" id="L57">        final var responsePayload = phoneNumberService.findAll(pageNumber);</span>
+
+<span class="fc" id="L59">        final var response = new PhoneNumbersResponse(responsePayload.content());</span>
+
+<span class="fc" id="L61">        addSelfLink(response, pageNumber);</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (responsePayload.hasPrev()) {</span>
+<span class="fc" id="L64">            addPrevLink(response, pageNumber);</span>
+        }
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (responsePayload.hasNext()) {</span>
+<span class="fc" id="L68">            addNextLink(response, pageNumber);</span>
+        }
+
+<span class="fc" id="L71">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+    @PostMapping(path = &quot;/{phoneNumber}&quot;, params = {&quot;action=activate&quot;})
+    public HttpEntity&lt;PhoneActivationResponse&gt; activateOne(@PathVariable(&quot;phoneNumber&quot;) final String phoneNumber) {
+<span class="fc" id="L76">        phoneNumberService.activate(phoneNumber);</span>
+
+<span class="fc" id="L78">        final var response = new PhoneActivationResponse(PhoneActivationResponse.STATUS_ACTIVATED);</span>
+<span class="fc" id="L79">        response.add(</span>
+<span class="fc" id="L80">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
+<span class="fc" id="L81">                        .withSelfRel()</span>
+        );
+
+<span class="fc" id="L84">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+    private void addSelfLink(final RepresentationModel&lt;?&gt; response, final String phoneNumber) {
+<span class="fc" id="L88">        response.add(</span>
+<span class="fc" id="L89">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
+<span class="fc" id="L90">                        .withSelfRel()</span>
+        );
+<span class="fc" id="L92">    }</span>
+
+    private void addSelfLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (currentPage == 0) {</span>
+<span class="fc" id="L96">            response.add(</span>
+<span class="fc" id="L97">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll())</span>
+<span class="fc" id="L98">                            .withSelfRel()</span>
+            );
+        } else {
+<span class="fc" id="L101">            response.add(</span>
+<span class="fc" id="L102">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage))</span>
+<span class="fc" id="L103">                            .withSelfRel()</span>
+            );
+        }
+<span class="fc" id="L106">    }</span>
+
+    private void addPrevLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
+<span class="fc" id="L109">        response.add(</span>
+<span class="fc" id="L110">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage - 1))</span>
+<span class="fc" id="L111">                        .withRel(IanaLinkRelations.PREV)</span>
+        );
+<span class="fc" id="L113">    }</span>
+
+    private void addNextLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
+<span class="fc" id="L116">        response.add(</span>
+<span class="fc" id="L117">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage + 1))</span>
+<span class="fc" id="L118">                        .withRel(IanaLinkRelations.NEXT)</span>
+        );
+<span class="fc" id="L120">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
