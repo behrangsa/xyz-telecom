@@ -21,7 +21,7 @@ import java.util.UUID;
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
 )
-<span class="fc" id="L24">@RequiredArgsConstructor</span>
+<span class="nc" id="L24">@RequiredArgsConstructor</span>
 public class CustomerController {
 
     private final PhoneNumberService phoneNumberService;
@@ -30,7 +30,7 @@ public class CustomerController {
             path = &quot;/{customerId}/phone-numbers&quot;
     )
     public HttpEntity&lt;CustomerPhoneNumbersResponse&gt; listPhoneNumbers(@PathVariable(&quot;customerId&quot;) UUID customerId) {
-<span class="fc" id="L33">        return listPhoneNumbers(customerId, 0);</span>
+<span class="nc" id="L33">        return listPhoneNumbers(customerId, 0);</span>
     }
 
     @GetMapping(
@@ -38,11 +38,11 @@ public class CustomerController {
             params = &quot;pageNumber&quot;
     )
     public HttpEntity&lt;CustomerPhoneNumbersResponse&gt; listPhoneNumbers(@PathVariable(&quot;customerId&quot;) UUID customerId, @RequestParam(&quot;pageNumber&quot;) final int pageNumber) {
-<span class="fc" id="L41">        final var responsePayload = phoneNumberService.findAllByCustomerId(customerId, pageNumber);</span>
+<span class="nc" id="L41">        final var responsePayload = phoneNumberService.findAllByCustomerId(customerId, pageNumber);</span>
 
-<span class="fc" id="L43">        final var response = new CustomerPhoneNumbersResponse(responsePayload.content());</span>
+<span class="nc" id="L43">        final var response = new CustomerPhoneNumbersResponse(responsePayload.content());</span>
 
-<span class="fc" id="L45">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L45">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

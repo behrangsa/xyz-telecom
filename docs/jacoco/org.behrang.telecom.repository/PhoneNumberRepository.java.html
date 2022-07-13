@@ -18,7 +18,7 @@ import java.util.UUID;
 
 
 @Repository
-<span class="fc" id="L21">@RequiredArgsConstructor</span>
+<span class="nc" id="L21">@RequiredArgsConstructor</span>
 public class PhoneNumberRepository {
 
     private final PhoneNumberRepositoryProperties properties;
@@ -26,59 +26,59 @@ public class PhoneNumberRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public List&lt;PhoneNumber&gt; findAll(final int offset, final int limit) {
-<span class="fc" id="L29">        final var sql = properties.getQueries().getFindAllPhoneNumbers();</span>
+<span class="nc" id="L29">        final var sql = properties.getQueries().getFindAllPhoneNumbers();</span>
 
-<span class="fc" id="L31">        final var params = new MapSqlParameterSource()</span>
-<span class="fc" id="L32">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
-<span class="fc" id="L33">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
+<span class="nc" id="L31">        final var params = new MapSqlParameterSource()</span>
+<span class="nc" id="L32">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
+<span class="nc" id="L33">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
 
-<span class="fc" id="L35">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
+<span class="nc" id="L35">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
     }
 
     public List&lt;PhoneNumber&gt; findAllByCustomerId(final UUID customerId, final int offset, final int limit) {
-<span class="fc" id="L39">        final var sql = properties.getQueries().getFindAllPhoneNumbersByCustomerId();</span>
+<span class="nc" id="L39">        final var sql = properties.getQueries().getFindAllPhoneNumbersByCustomerId();</span>
 
-<span class="fc" id="L41">        final var params = new MapSqlParameterSource()</span>
-<span class="fc" id="L42">                .addValue(ParameterNames.CUSTOMER_ID, customerId)</span>
-<span class="fc" id="L43">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
-<span class="fc" id="L44">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
+<span class="nc" id="L41">        final var params = new MapSqlParameterSource()</span>
+<span class="nc" id="L42">                .addValue(ParameterNames.CUSTOMER_ID, customerId)</span>
+<span class="nc" id="L43">                .addValue(CommonConstants.SQL_LIMIT, limit)</span>
+<span class="nc" id="L44">                .addValue(CommonConstants.SQL_OFFSET, offset);</span>
 
-<span class="fc" id="L46">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
+<span class="nc" id="L46">        return jdbcTemplate.query(sql, params, new PhoneNumberMapper());</span>
     }
 
     public long countAll() {
-<span class="fc" id="L50">        final var sql = properties.getQueries().getCountAll();</span>
+<span class="nc" id="L50">        final var sql = properties.getQueries().getCountAll();</span>
 
         //noinspection ConstantConditions
-<span class="fc" id="L53">        return jdbcTemplate.queryForObject(sql, Collections.emptyMap(), Long.class);</span>
+<span class="nc" id="L53">        return jdbcTemplate.queryForObject(sql, Collections.emptyMap(), Long.class);</span>
     }
 
     public long countAllByCustomerId(final UUID customerId) {
-<span class="fc" id="L57">        final var sql = properties.getQueries().getCountAllByCustomerId();</span>
+<span class="nc" id="L57">        final var sql = properties.getQueries().getCountAllByCustomerId();</span>
 
-<span class="fc" id="L59">        final var params =</span>
-<span class="fc" id="L60">                new MapSqlParameterSource().addValue(ParameterNames.CUSTOMER_ID, customerId);</span>
+<span class="nc" id="L59">        final var params =</span>
+<span class="nc" id="L60">                new MapSqlParameterSource().addValue(ParameterNames.CUSTOMER_ID, customerId);</span>
 
         //noinspection ConstantConditions
-<span class="fc" id="L63">        return jdbcTemplate.queryForObject(sql, params, Long.class);</span>
+<span class="nc" id="L63">        return jdbcTemplate.queryForObject(sql, params, Long.class);</span>
     }
 
     public PhoneNumber findByPhoneNumber(final String phoneNumber) {
-<span class="fc" id="L67">        final var sql = properties.getQueries().getFindByPhoneNumber();</span>
+<span class="nc" id="L67">        final var sql = properties.getQueries().getFindByPhoneNumber();</span>
 
-<span class="fc" id="L69">        final var params =</span>
-<span class="fc" id="L70">                new MapSqlParameterSource().addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
+<span class="nc" id="L69">        final var params =</span>
+<span class="nc" id="L70">                new MapSqlParameterSource().addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
 
-<span class="fc" id="L72">        return jdbcTemplate.queryForObject(sql, params, new PhoneNumberMapper());</span>
+<span class="nc" id="L72">        return jdbcTemplate.queryForObject(sql, params, new PhoneNumberMapper());</span>
     }
 
     public int activateByPhoneNumber(final String phoneNumber) {
-<span class="fc" id="L76">        final var sql = properties.getQueries().getActivateByPhoneNumber();</span>
+<span class="nc" id="L76">        final var sql = properties.getQueries().getActivateByPhoneNumber();</span>
 
-<span class="fc" id="L78">        final var params = new MapSqlParameterSource()</span>
-<span class="fc" id="L79">                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
+<span class="nc" id="L78">        final var params = new MapSqlParameterSource()</span>
+<span class="nc" id="L79">                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);</span>
 
-<span class="fc" id="L81">        return jdbcTemplate.update(sql, params);</span>
+<span class="nc" id="L81">        return jdbcTemplate.update(sql, params);</span>
     }
 
 <span class="fc" id="L84">    public static class PhoneNumberMapper implements RowMapper&lt;PhoneNumber&gt; {</span>
