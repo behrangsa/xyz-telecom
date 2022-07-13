@@ -4,6 +4,10 @@
 A REST API in https://en.wikipedia.org/wiki/Richardson_Maturity_Model[Level 3]
 maturity level for a fictional Telecom company named `XYZ Telecom`.
 
+
+image:https://github.com/behrangsa/xyz-telecom/actions/workflows/main.yml/badge.svg[]
+image:.github/badges/jacoco.svg[]
+
 == Dependencies
 
 * Java 17
@@ -33,3 +37,4 @@ https://spring.io/projects/spring-restdocs[Spring REST Docs].
 
 The OpenAPI specification is generated automatically using https://springdoc.org[SpringDoc]
 and is accessible at `/swagger-ui/index.html`.
+
