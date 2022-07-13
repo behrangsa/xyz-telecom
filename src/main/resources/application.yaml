@@ -41,3 +41,8 @@ spring:
     password: password
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:15432/postgres
+
+springdoc:
+  swagger-ui:
+    supported-submit-methods: []
+    try-it-out-enabled: off

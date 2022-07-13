@@ -31,4 +31,5 @@ https://spring.io/projects/spring-restdocs[Spring REST Docs].
 
 == OpenAPI Specification
 
-The OpenAPI specification is generated automatically using SpringFox.
+The OpenAPI specification is generated automatically using https://springdoc.org[SpringDoc]
+and is accessible at `/swagger-ui/index.html`.
