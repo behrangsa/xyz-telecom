@@ -13,13 +13,13 @@ public final class CustomerPhoneNumbersResponse extends RepresentationModel&lt;C
     private final List&lt;PhoneNumber&gt; content;
 
     @JsonCreator
-<span class="fc" id="L16">    public CustomerPhoneNumbersResponse(@JsonProperty(&quot;content&quot;) List&lt;PhoneNumber&gt; content) {</span>
-<span class="pc bpc" id="L17" title="1 of 2 branches missed.">        this.content = content == null ? Collections.emptyList() :</span>
-<span class="fc" id="L18">                content.stream().peek(x -&gt; x.setCustomerId(null)).toList();</span>
-<span class="fc" id="L19">    }</span>
+<span class="nc" id="L16">    public CustomerPhoneNumbersResponse(@JsonProperty(&quot;content&quot;) List&lt;PhoneNumber&gt; content) {</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        this.content = content == null ? Collections.emptyList() :</span>
+<span class="nc" id="L18">                content.stream().peek(x -&gt; x.setCustomerId(null)).toList();</span>
+<span class="nc" id="L19">    }</span>
 
     public List&lt;PhoneNumber&gt; getContent() {
-<span class="fc" id="L22">        return List.copyOf(content);</span>
+<span class="nc" id="L22">        return List.copyOf(content);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
