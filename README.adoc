@@ -33,3 +33,4 @@ https://spring.io/projects/spring-restdocs[Spring REST Docs].
 
 The OpenAPI specification is generated automatically using https://springdoc.org[SpringDoc]
 and is accessible at `/swagger-ui/index.html`.
+
