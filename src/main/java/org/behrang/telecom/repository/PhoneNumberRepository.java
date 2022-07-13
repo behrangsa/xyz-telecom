@@ -63,18 +63,6 @@ public class PhoneNumberRepository {
         return jdbcTemplate.queryForObject(sql, params, Long.class);
     }
 
-    public boolean existsByPhoneNumber(final String phoneNumber) {
-        final var sql = properties.getQueries().getCountByPhoneNumber();
-
-        final var params = new MapSqlParameterSource()
-                .addValue(ParameterNames.PHONE_NUMBER, phoneNumber);
-
-        final var count = jdbcTemplate.queryForObject(sql, params, Integer.class);
-
-        //noinspection ConstantConditions
-        return count != 0;
-    }
-
     public PhoneNumber findByPhoneNumber(final String phoneNumber) {
         final var sql = properties.getQueries().getFindByPhoneNumber();
 

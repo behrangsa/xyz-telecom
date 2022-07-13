@@ -53,7 +53,7 @@ public class PhoneNumberService {
         }
 
         final int pageSize = paginationProperties.getPageSize();
-        final var totalCount = phoneNumberRepository.countAll();
+        final var totalCount = phoneNumberRepository.countAllByCustomerId(customerId);
         final var offset = page * pageSize;
         final var hasNext = totalCount > offset + pageSize;
         final var hasPrev = page > 0;

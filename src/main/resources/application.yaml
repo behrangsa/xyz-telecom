@@ -23,9 +23,6 @@ repositories:
       count-all-by-customer-id: >
         SELECT count(*) from phone_numbers
         WHERE customer_id = :customerId
-      count-by-phone-number: >
-        SELECT count(*) FROM phone_numbers
-        WHERE phone_number = :phoneNumber
       find-by-phone-number: >
         SELECT id, customer_id, phone_number, is_active FROM phone_numbers
         WHERE phone_number = :phoneNumber

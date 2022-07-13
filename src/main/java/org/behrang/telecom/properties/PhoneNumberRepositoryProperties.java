@@ -21,8 +21,6 @@ public class PhoneNumberRepositoryProperties {
 
         private String countAllByCustomerId;
 
-        private String countByPhoneNumber;
-
         private String findByPhoneNumber;
 
         private String activateByPhoneNumber;
