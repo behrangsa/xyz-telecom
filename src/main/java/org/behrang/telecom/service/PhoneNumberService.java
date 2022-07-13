@@ -3,9 +3,10 @@ package org.behrang.telecom.service;
 import lombok.RequiredArgsConstructor;
 import org.behrang.telecom.entity.Customer;
 import org.behrang.telecom.entity.PhoneNumber;
-import org.behrang.telecom.exception.PhoneNumberAlreadyActivatedException;
 import org.behrang.telecom.exception.EntityNotFoundException;
+import org.behrang.telecom.exception.PhoneNumberAlreadyActivatedException;
 import org.behrang.telecom.model.CollectionPayload;
+import org.behrang.telecom.model.SinglePayload;
 import org.behrang.telecom.properties.PaginationProperties;
 import org.behrang.telecom.repository.CustomerRepository;
 import org.behrang.telecom.repository.PhoneNumberRepository;
@@ -64,6 +65,10 @@ public class PhoneNumberService {
         );
 
         return new CollectionPayload<>(phoneNumbers, hasNext, hasPrev);
+    }
+
+    public SinglePayload<PhoneNumber> findByPhoneNumber(final String phoneNumber) {
+        return new SinglePayload<>(phoneNumberRepository.findByPhoneNumber(phoneNumber));
     }
 
     public void activate(final String phoneNumber) {

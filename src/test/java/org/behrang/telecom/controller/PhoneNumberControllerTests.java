@@ -1,8 +1,6 @@
 package org.behrang.telecom.controller;
 
 import org.behrang.telecom.test.AbstractIntegrationTest;
-import org.behrang.telecom.test.TestOrder;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
@@ -16,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-
 public class PhoneNumberControllerTests extends AbstractIntegrationTest {
 
     private static final String INACTIVE_PHONE_NUMBER = "099995";
@@ -24,6 +21,22 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
     private static final String ACTIVE_PHONE_NUMBER = "099979";
 
     private static final String NON_EXISTENT_PHONE_NUMBER = "999999999";
+
+    @Test
+    @Sql("/ddl.sql")
+    @Sql("/customers.sql")
+    @Sql("/phone-numbers.sql")
+    void testGetOne_Existing() throws Exception {
+        mockMvc.perform(
+                        get(String.format("/phone-numbers/%s", ACTIVE_PHONE_NUMBER)).contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.id", equalTo("67f5aa45-ae4f-48fb-bb3f-e3b5ad66fd85")))
+                .andExpect(jsonPath("$.content.customerId", equalTo("e1e89323-ac97-4261-bbdd-f400be695359")))
+                .andExpect(jsonPath("$.content.phoneNumber", equalTo(ACTIVE_PHONE_NUMBER)))
+                .andExpect(jsonPath("$._links.self.href", equalTo(String.format("http://localhost:8080/phone-numbers/%s", ACTIVE_PHONE_NUMBER))));
+    }
 
     @Test
     @Sql("/ddl.sql")
@@ -82,7 +95,7 @@ public class PhoneNumberControllerTests extends AbstractIntegrationTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", equalTo("ACTIVATED")))
-                .andExpect(jsonPath("$._links.self.href", equalTo("http://localhost:8080/phone-numbers/099995?action=activate")));
+                .andExpect(jsonPath("$._links.self.href", equalTo("http://localhost:8080/phone-numbers/099995")));
     }
 
     @Test

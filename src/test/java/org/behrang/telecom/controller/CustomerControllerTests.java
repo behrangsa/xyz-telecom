@@ -1,8 +1,6 @@
 package org.behrang.telecom.controller;
 
 import org.behrang.telecom.test.AbstractIntegrationTest;
-import org.behrang.telecom.test.TestOrder;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
@@ -15,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class CustomerControllerTest extends AbstractIntegrationTest {
+class CustomerControllerTests extends AbstractIntegrationTest {
 
     @Test
     @Sql("/ddl.sql")

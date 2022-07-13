@@ -15,9 +15,9 @@ public interface PhoneNumberConstants {
 
     interface ParameterNames {
 
-        String PHONE_NUMBER = "phoneNumber";
-
         String CUSTOMER_ID = "customerId";
+
+        String PHONE_NUMBER = "phoneNumber";
 
     }
 }

@@ -2,8 +2,6 @@ package org.behrang.telecom.repository;
 
 
 import org.behrang.telecom.test.AbstractIntegrationTest;
-import org.behrang.telecom.test.TestOrder;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Sql("/ddl.sql")
 @Sql("/customers.sql")
 @Sql("/phone-numbers.sql")
-class CustomerRepositoryTest extends AbstractIntegrationTest {
+class CustomerRepositoryTests extends AbstractIntegrationTest {
 
     private static final UUID EXISTING_CUSTOMER_ID = UUID.fromString("0a60ce63-dfcb-48f4-a269-a01cbb8a338c");
 

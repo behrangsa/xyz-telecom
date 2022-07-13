@@ -1,9 +1,7 @@
 package org.behrang.telecom.repository;
 
 
-import org.behrang.telecom.test.TestOrder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -14,7 +12,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-class CustomerMapperTest {
+class CustomerMapperTests {
 
     private CustomerRepository.CustomerMapper mapper;
 
@@ -25,11 +23,16 @@ class CustomerMapperTest {
 
     @Test
     void testMapRow() throws Exception {
+        // Given
         final var resultSet = mock(ResultSet.class);
+
         when(resultSet.getString("id")).thenReturn("0914f529-9eca-4e0f-b4cd-4ada3ad432b6");
         when(resultSet.getString("name")).thenReturn("John Doe");
 
+        // When
         final var actual = mapper.mapRow(resultSet, 0);
+
+        // Then
         assertNotNull(actual);
         assertEquals("0914f529-9eca-4e0f-b4cd-4ada3ad432b6", actual.getId().toString());
         assertEquals("John Doe", actual.getName());
