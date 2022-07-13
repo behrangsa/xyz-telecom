@@ -38,6 +38,12 @@ jobs:
             git push
           fi
 
+      - name: Prepare website
+        run: |
+          mkdir -p docs/spec &&
+          cp -vr target/site/jacoco docs &&
+          cp -vr target/generated-docs/index.html docs/spec
+
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
         with:
