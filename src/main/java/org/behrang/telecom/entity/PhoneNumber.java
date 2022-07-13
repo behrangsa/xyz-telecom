@@ -2,10 +2,12 @@ package org.behrang.telecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.Generated;
 
 import java.util.UUID;
 
 @Data
+@Generated
 public class PhoneNumber {
 
     private UUID id;

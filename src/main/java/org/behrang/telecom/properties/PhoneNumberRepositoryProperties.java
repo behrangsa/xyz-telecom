@@ -1,6 +1,7 @@
 package org.behrang.telecom.properties;
 
 import lombok.Data;
+import lombok.Generated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Data
+@Generated
 public class PhoneNumberRepositoryProperties {
 
     private Queries queries;
 
     @Data
+    @Generated
     public static class Queries {
         private String findAllPhoneNumbers;
 
