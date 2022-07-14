@@ -519,21 +519,103 @@ the HTTP syntax, HTTPie, and curl commands are included for your reference:</p>
 </div>
 <div class="sect3">
 <h4 id="_happy_path">Happy path</h4>
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">HTTP request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-request.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /customers/ff1ca1a5-239a-42c6-aa62-0c0442b682ac/phone-numbers HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTPie request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/customer_controller_tests/test_get_all__existing_customer_with_one_page/httpie-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost:8080/customers/ff1ca1a5-239a-42c6-aa62-0c0442b682ac/phone-numbers' \
+    'Content-Type:application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">curl request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/customer_controller_tests/test_get_all__existing_customer_with_one_page/curl-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/customers/ff1ca1a5-239a-42c6-aa62-0c0442b682ac/phone-numbers' -i -X GET \
+    -H 'Content-Type: application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTP response</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/customer_controller_tests/test_get_all__existing_customer_with_one_page/http-response.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 1740
+
+{
+  "content" : [ {
+    "id" : "d68cd27e-63f2-40a1-82f1-fe3d3e7babef",
+    "phoneNumber" : "09990",
+    "active" : true
+  }, {
+    "id" : "1682cdd0-be14-4357-85b1-5581436954e2",
+    "phoneNumber" : "09991",
+    "active" : true
+  }, {
+    "id" : "a1dc8b33-8652-47dd-9f81-a9ca85b2a1d5",
+    "phoneNumber" : "099910",
+    "active" : true
+  }, {
+    "id" : "c11fcf3a-1155-45fe-893e-cbeb69d77670",
+    "phoneNumber" : "099911",
+    "active" : true
+  }, {
+    "id" : "ac8287c5-ad8b-47da-a855-839df7096d63",
+    "phoneNumber" : "099912",
+    "active" : true
+  }, {
+    "id" : "358a850e-e816-4652-9b67-90568539b141",
+    "phoneNumber" : "099913",
+    "active" : true
+  }, {
+    "id" : "056bf895-4e03-411b-8736-41a09ea4696c",
+    "phoneNumber" : "099914",
+    "active" : true
+  }, {
+    "id" : "cfbc6810-95d8-4335-ae86-07f351ac05c5",
+    "phoneNumber" : "099915",
+    "active" : true
+  }, {
+    "id" : "eec1bcdf-0685-4233-819d-c778d5611da0",
+    "phoneNumber" : "09992",
+    "active" : true
+  }, {
+    "id" : "6eae733e-3511-4752-868d-c88d72cac266",
+    "phoneNumber" : "09993",
+    "active" : true
+  }, {
+    "id" : "892849e2-ad73-4c87-93bd-6d23ba26d465",
+    "phoneNumber" : "09994",
+    "active" : true
+  }, {
+    "id" : "8c895aa5-90ae-42c3-bbfd-2b69dddd06a9",
+    "phoneNumber" : "09995",
+    "active" : true
+  }, {
+    "id" : "03cf6b30-2b7c-45c9-9646-42fec2263d23",
+    "phoneNumber" : "09996",
+    "active" : true
+  }, {
+    "id" : "86afec10-387f-4c3c-9c9d-ada5b14a8791",
+    "phoneNumber" : "09997",
+    "active" : false
+  }, {
+    "id" : "4e9cf6e7-5243-4d2a-9437-6f0b476c2917",
+    "phoneNumber" : "09998",
+    "active" : false
+  }, {
+    "id" : "502e5441-c93c-4963-99ce-86dc6c17a9f3",
+    "phoneNumber" : "09999",
+    "active" : true
+  } ]
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -550,21 +632,175 @@ the HTTP syntax, HTTPie, and curl commands are included for your reference:</p>
 </div>
 <div class="sect3">
 <h4 id="_happy_path_2">Happy path</h4>
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">HTTP request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_get_all__multiple_pages/http-request.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /phone-numbers?pageNumber=2 HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTPie request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_get_all__multiple_pages/httpie-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http GET 'http://localhost:8080/phone-numbers?pageNumber=2' \
+    'Content-Type:application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">curl request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_get_all__multiple_pages/curl-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/phone-numbers?pageNumber=2' -i -X GET \
+    -H 'Content-Type: application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTP response</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_get_all__multiple_pages/http-response.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 4486
+
+{
+  "content" : [ {
+    "id" : "965eff2e-43bb-455f-9dd9-458fd96e53d1",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099954",
+    "active" : false
+  }, {
+    "id" : "1043b9f4-0b19-44ea-8dad-8229d8decfc3",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099955",
+    "active" : true
+  }, {
+    "id" : "7f19105e-5012-43fa-84cf-d7a7962dc592",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099956",
+    "active" : false
+  }, {
+    "id" : "18e1597e-6458-40b3-b288-2da503505bde",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099957",
+    "active" : false
+  }, {
+    "id" : "b90a72e0-0f0f-423c-b5bf-e12e9d66bb7e",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099958",
+    "active" : true
+  }, {
+    "id" : "e5911b9e-fb43-4e1e-8726-13caf5473258",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099959",
+    "active" : true
+  }, {
+    "id" : "03cf6b30-2b7c-45c9-9646-42fec2263d23",
+    "customerId" : "ff1ca1a5-239a-42c6-aa62-0c0442b682ac",
+    "phoneNumber" : "09996",
+    "active" : true
+  }, {
+    "id" : "0e6fd8b7-2112-45df-8787-433675cd4e2f",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099960",
+    "active" : true
+  }, {
+    "id" : "b47dc649-fecf-476b-a7dc-79fa511b08e3",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099961",
+    "active" : true
+  }, {
+    "id" : "c0b4c158-e14d-46ea-9c22-df0eae65061c",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099962",
+    "active" : true
+  }, {
+    "id" : "99799e39-0083-4bd4-8fc7-c1709071ff8c",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099963",
+    "active" : false
+  }, {
+    "id" : "e7599af6-b5ec-479e-9f50-bcb0053c970e",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099964",
+    "active" : true
+  }, {
+    "id" : "f124ceb5-3d45-4379-be14-45cb9aa14645",
+    "customerId" : "476ac980-e70b-4673-affe-daf76046f81f",
+    "phoneNumber" : "099965",
+    "active" : false
+  }, {
+    "id" : "667c12f3-714d-409e-9bca-cec04d75a204",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099966",
+    "active" : true
+  }, {
+    "id" : "5dbc2709-1288-4b21-8218-e8a8f8f69093",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099967",
+    "active" : false
+  }, {
+    "id" : "9f8ecdd1-2ec2-4f69-b709-d06149f3915c",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099968",
+    "active" : false
+  }, {
+    "id" : "3dfdae55-49df-4e5b-9efb-d911d7db2aff",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099969",
+    "active" : true
+  }, {
+    "id" : "86afec10-387f-4c3c-9c9d-ada5b14a8791",
+    "customerId" : "ff1ca1a5-239a-42c6-aa62-0c0442b682ac",
+    "phoneNumber" : "09997",
+    "active" : false
+  }, {
+    "id" : "cd11e07e-628b-48b2-812c-d2e307729c41",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099970",
+    "active" : true
+  }, {
+    "id" : "c05ad74f-a1f9-4125-b7c2-06fa3a57fad0",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099971",
+    "active" : true
+  }, {
+    "id" : "716299ba-7038-423c-aa28-966c9b3f0a89",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099972",
+    "active" : false
+  }, {
+    "id" : "4ced6991-93bc-461d-a152-e98b5f885405",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099973",
+    "active" : true
+  }, {
+    "id" : "1546ca70-c7d3-445b-b354-50d9cb326185",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099974",
+    "active" : false
+  }, {
+    "id" : "9411a9e1-80ee-472a-a4cd-54617d24129a",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099975",
+    "active" : true
+  }, {
+    "id" : "7353fe12-f10f-4a16-bb63-c75df22b3324",
+    "customerId" : "563e76b0-179c-43d5-87ee-1b0ccecc301d",
+    "phoneNumber" : "099976",
+    "active" : true
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/phone-numbers?pageNumber=2"
+    },
+    "prev" : {
+      "href" : "http://localhost:8080/phone-numbers?pageNumber=1"
+    },
+    "next" : {
+      "href" : "http://localhost:8080/phone-numbers?pageNumber=3"
+    }
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -576,63 +812,122 @@ the HTTP syntax, HTTPie, and curl commands for n scenarios are given for your re
 </div>
 <div class="sect3">
 <h4 id="_happy_path_3">Happy path</h4>
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">HTTP request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__successful/http-request.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /phone-numbers/099995?action=activate HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTPie request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__successful/httpie-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http POST 'http://localhost:8080/phone-numbers/099995?action=activate' \
+    'Content-Type:application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">curl request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__successful/curl-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/phone-numbers/099995?action=activate' -i -X POST \
+    -H 'Content-Type: application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTP response</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__successful/http-response.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 130
+
+{
+  "content" : "ACTIVATED",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/phone-numbers/099995"
+    }
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_phone_number_not_found">Phone number not found</h4>
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">HTTP request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__not_found/http-request.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /phone-numbers/999999999?action=activate HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTPie request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__not_found/httpie-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http POST 'http://localhost:8080/phone-numbers/999999999?action=activate' \
+    'Content-Type:application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">curl request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__not_found/curl-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/phone-numbers/999999999?action=activate' -i -X POST \
+    -H 'Content-Type: application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTP response</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__not_found/http-response.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 404 Not Found
+Content-Type: application/hal+json
+Content-Length: 42
+
+{
+  "content" : "Phone number not found"
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_phone_number_already_activated">Phone number already activated</h4>
-<div class="paragraph">
+<div class="listingblock">
 <div class="title">HTTP request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__already_activated/http-request.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /phone-numbers/099979?action=activate HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTPie request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__already_activated/httpie-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ http POST 'http://localhost:8080/phone-numbers/099979?action=activate' \
+    'Content-Type:application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">curl request</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__already_activated/curl-request.adoc[]</p>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/phone-numbers/099979?action=activate' -i -X POST \
+    -H 'Content-Type: application/json'</code></pre>
 </div>
-<div class="paragraph">
+</div>
+<div class="listingblock">
 <div class="title">HTTP response</div>
-<p>Unresolved directive in index.adoc - include::/home/runner/work/xyz-telecom/xyz-telecom/target/generated-snippets/phone_number_controller_tests/test_activate__already_activated/http-response.adoc[]</p>
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+Content-Type: application/hal+json
+Content-Length: 50
+
+{
+  "content" : "Phone number already activated"
+}</code></pre>
+</div>
 </div>
 <hr>
 <div class="paragraph">
-<p>Generated at 2022-07-13 12:29:21 UTC.</p>
+<p>Generated at 2022-07-14 02:30:03 UTC.</p>
 </div>
 </div>
 </div>
@@ -641,7 +936,7 @@ the HTTP syntax, HTTPie, and curl commands for n scenarios are given for your re
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-13 12:29:21 UTC
+Last updated 2022-07-14 02:30:03 UTC
 </div>
 </div>
 </body>

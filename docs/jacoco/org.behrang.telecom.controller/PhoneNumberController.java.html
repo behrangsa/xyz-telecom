@@ -31,92 +31,92 @@ import org.springframework.web.bind.annotation.RestController;
                 HalMediaType.APPLICATION_HAL_JSON_VALUE
         }
 )
-<span class="nc" id="L34">@RequiredArgsConstructor</span>
+<span class="fc" id="L34">@RequiredArgsConstructor</span>
 public class PhoneNumberController {
 
     private final PhoneNumberService phoneNumberService;
 
     @GetMapping(path = &quot;/{phoneNumber}&quot;)
     public HttpEntity&lt;PhoneNumberResponse&gt; getOne(@PathVariable(&quot;phoneNumber&quot;) final String phoneNumber) {
-<span class="nc" id="L41">        final var responsePayload = phoneNumberService.findByPhoneNumber(phoneNumber);</span>
+<span class="fc" id="L41">        final var responsePayload = phoneNumberService.findByPhoneNumber(phoneNumber);</span>
 
-<span class="nc" id="L43">        final var response = new PhoneNumberResponse(responsePayload.content());</span>
+<span class="fc" id="L43">        final var response = new PhoneNumberResponse(responsePayload.content());</span>
 
-<span class="nc" id="L45">        addSelfLink(response, phoneNumber);</span>
+<span class="fc" id="L45">        addSelfLink(response, phoneNumber);</span>
 
-<span class="nc" id="L47">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="fc" id="L47">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
     @GetMapping
     public HttpEntity&lt;PhoneNumbersResponse&gt; getAll() {
-<span class="nc" id="L52">        return getAll(0);</span>
+<span class="fc" id="L52">        return getAll(0);</span>
     }
 
     @GetMapping(params = {&quot;pageNumber&quot;})
     public HttpEntity&lt;PhoneNumbersResponse&gt; getAll(@RequestParam(&quot;pageNumber&quot;) final int pageNumber) {
-<span class="nc" id="L57">        final var responsePayload = phoneNumberService.findAll(pageNumber);</span>
+<span class="fc" id="L57">        final var responsePayload = phoneNumberService.findAll(pageNumber);</span>
 
-<span class="nc" id="L59">        final var response = new PhoneNumbersResponse(responsePayload.content());</span>
+<span class="fc" id="L59">        final var response = new PhoneNumbersResponse(responsePayload.content());</span>
 
-<span class="nc" id="L61">        addSelfLink(response, pageNumber);</span>
+<span class="fc" id="L61">        addSelfLink(response, pageNumber);</span>
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (responsePayload.hasPrev()) {</span>
-<span class="nc" id="L64">            addPrevLink(response, pageNumber);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (responsePayload.hasPrev()) {</span>
+<span class="fc" id="L64">            addPrevLink(response, pageNumber);</span>
         }
 
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (responsePayload.hasNext()) {</span>
-<span class="nc" id="L68">            addNextLink(response, pageNumber);</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (responsePayload.hasNext()) {</span>
+<span class="fc" id="L68">            addNextLink(response, pageNumber);</span>
         }
 
-<span class="nc" id="L71">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="fc" id="L71">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
     @PostMapping(path = &quot;/{phoneNumber}&quot;, params = {&quot;action=activate&quot;})
     public HttpEntity&lt;PhoneActivationResponse&gt; activateOne(@PathVariable(&quot;phoneNumber&quot;) final String phoneNumber) {
-<span class="nc" id="L76">        phoneNumberService.activate(phoneNumber);</span>
+<span class="fc" id="L76">        phoneNumberService.activate(phoneNumber);</span>
 
-<span class="nc" id="L78">        final var response = new PhoneActivationResponse(PhoneActivationResponse.STATUS_ACTIVATED);</span>
-<span class="nc" id="L79">        response.add(</span>
-<span class="nc" id="L80">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
-<span class="nc" id="L81">                        .withSelfRel()</span>
+<span class="fc" id="L78">        final var response = new PhoneActivationResponse(PhoneActivationResponse.STATUS_ACTIVATED);</span>
+<span class="fc" id="L79">        response.add(</span>
+<span class="fc" id="L80">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
+<span class="fc" id="L81">                        .withSelfRel()</span>
         );
 
-<span class="nc" id="L84">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="fc" id="L84">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
     private void addSelfLink(final RepresentationModel&lt;?&gt; response, final String phoneNumber) {
-<span class="nc" id="L88">        response.add(</span>
-<span class="nc" id="L89">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
-<span class="nc" id="L90">                        .withSelfRel()</span>
+<span class="fc" id="L88">        response.add(</span>
+<span class="fc" id="L89">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getOne(phoneNumber))</span>
+<span class="fc" id="L90">                        .withSelfRel()</span>
         );
-<span class="nc" id="L92">    }</span>
+<span class="fc" id="L92">    }</span>
 
     private void addSelfLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (currentPage == 0) {</span>
-<span class="nc" id="L96">            response.add(</span>
-<span class="nc" id="L97">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll())</span>
-<span class="nc" id="L98">                            .withSelfRel()</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (currentPage == 0) {</span>
+<span class="fc" id="L96">            response.add(</span>
+<span class="fc" id="L97">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll())</span>
+<span class="fc" id="L98">                            .withSelfRel()</span>
             );
         } else {
-<span class="nc" id="L101">            response.add(</span>
-<span class="nc" id="L102">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage))</span>
-<span class="nc" id="L103">                            .withSelfRel()</span>
+<span class="fc" id="L101">            response.add(</span>
+<span class="fc" id="L102">                    WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage))</span>
+<span class="fc" id="L103">                            .withSelfRel()</span>
             );
         }
-<span class="nc" id="L106">    }</span>
+<span class="fc" id="L106">    }</span>
 
     private void addPrevLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
-<span class="nc" id="L109">        response.add(</span>
-<span class="nc" id="L110">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage - 1))</span>
-<span class="nc" id="L111">                        .withRel(IanaLinkRelations.PREV)</span>
+<span class="fc" id="L109">        response.add(</span>
+<span class="fc" id="L110">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage - 1))</span>
+<span class="fc" id="L111">                        .withRel(IanaLinkRelations.PREV)</span>
         );
-<span class="nc" id="L113">    }</span>
+<span class="fc" id="L113">    }</span>
 
     private void addNextLink(final RepresentationModel&lt;?&gt; response, final int currentPage) {
-<span class="nc" id="L116">        response.add(</span>
-<span class="nc" id="L117">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage + 1))</span>
-<span class="nc" id="L118">                        .withRel(IanaLinkRelations.NEXT)</span>
+<span class="fc" id="L116">        response.add(</span>
+<span class="fc" id="L117">                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PhoneNumberController.class).getAll(currentPage + 1))</span>
+<span class="fc" id="L118">                        .withRel(IanaLinkRelations.NEXT)</span>
         );
-<span class="nc" id="L120">    }</span>
+<span class="fc" id="L120">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

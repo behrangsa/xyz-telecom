@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-<span class="nc" id="L13">public class GlobalExceptionHandler {</span>
+<span class="fc" id="L13">public class GlobalExceptionHandler {</span>
 
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handleDataAccessExceptions(final EntityNotFoundException ex) {
-<span class="nc" id="L19">        return new ErrorResponse(ex.getMessage());</span>
+<span class="fc" id="L19">        return new ErrorResponse(ex.getMessage());</span>
     }
 
     @ExceptionHandler(PhoneNumberAlreadyActivatedException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorResponse handleDataAccessExceptions(final PhoneNumberAlreadyActivatedException ex) {
-<span class="nc" id="L26">        return new ErrorResponse(ex.getMessage());</span>
+<span class="fc" id="L26">        return new ErrorResponse(ex.getMessage());</span>
     }
 
 }
