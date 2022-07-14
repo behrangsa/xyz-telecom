@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class CustomerControllerIT extends AbstractIntegrationTest {
+class CustomerControllerTests extends AbstractIntegrationTest {
 
     @Test
     @Sql("/ddl.sql")

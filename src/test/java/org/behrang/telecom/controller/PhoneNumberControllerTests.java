@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-public class PhoneNumberControllerIT extends AbstractIntegrationTest {
+public class PhoneNumberControllerTests extends AbstractIntegrationTest {
 
     private static final String INACTIVE_PHONE_NUMBER = "099995";
 
