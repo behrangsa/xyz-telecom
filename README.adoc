@@ -30,11 +30,14 @@ docker compose up
 
 == Live Documentation
 
-Contains sample requests and responses generated from integration tests, using
+The https://behrangsa.github.io/xyz-telecom/rest-docs/[live documentation],
+contains sample requests and responses generated from integration tests, using
 https://spring.io/projects/spring-restdocs[Spring REST Docs].
 
 == OpenAPI Specification
 
-The OpenAPI specification is generated automatically using https://springdoc.org[SpringDoc]
-and is accessible at `/swagger-ui/index.html`.
+The OpenAPI specification is generated automatically using the
+https://springdoc.org[SpringDoc] Maven plugin and is accessible
+https://behrangsa.github.io/xyz-telecom/open-api/[here].
+
 
