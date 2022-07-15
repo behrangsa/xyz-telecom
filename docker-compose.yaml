@@ -11,6 +11,17 @@ services:
       - 'POSTGRES_PASSWORD=password'
       - 'POSTGRES_USER=xyz-api'
 
+  xyz-telecom-api:
+    build: .
+    networks:
+      - xyz-net
+    ports:
+      - "18888:8888"
+    environment:
+      - 'SPRING_DATASOURCE_USERNAME=xyz-api'
+      - 'SPRING_DATASOURCE_PASSWORD=password'
+      - 'SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver'
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://xyz-net:5432/postgres'
 
 networks:
   xyz-net:
